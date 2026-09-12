@@ -1,132 +1,58 @@
-# SpaceX Falcon 9 First-Stage Landing Prediction
+# SpaceX Portfolio Package
 
-An end-to-end Data Science project analysing SpaceX Falcon 9 launches and predicting whether the first stage will successfully land.
+This package contains the final portfolio-ready machine-learning notebook and two versions of the launch dashboard.
 
-The project covers the complete workflow from data acquisition to exploratory analysis, machine-learning modelling and interactive visualization.
+## Files
 
-## Project objective
+- `SpaceX_Machine_Learning_Prediction_FINAL.ipynb`
+  - Standard Python/Jupyter version.
+  - Removes Pyodide-specific code.
+  - Prevents preprocessing leakage by fitting scaling inside model pipelines.
+  - Compares Logistic Regression, SVM, Decision Tree and KNN.
+  - Adds a final test-accuracy comparison chart.
 
-Falcon 9 launch economics depend heavily on the ability to recover and reuse the first stage.
+- `spacex_dashboard.html`
+  - Self-contained interactive dashboard.
+  - No Python server required.
+  - Open directly in a browser or upload as a static HTML file.
+  - Plotly JavaScript is embedded in the file.
 
-This project investigates historical launch data and builds classification models to estimate first-stage landing success from mission and vehicle characteristics.
+- `spacex_dashboard.py`
+  - Dash version of the same dashboard.
+  - Suitable for local execution or deployment to a Python host such as Render.
 
-## Data Science workflow
+- `spacex_launch_dash.csv`
+  - Dataset used by the interactive dashboard.
 
-### 1. Data acquisition
+- `requirements.txt`
+  - Dependencies for the Dash version.
 
-Launch information is collected from multiple sources using:
+- `Procfile`
+  - Gunicorn start command for simple cloud deployment.
 
-- SpaceX API data
-- Web scraping
-
-### 2. Data preparation
-
-The collected data is cleaned and transformed to create a structured dataset suitable for analysis and modelling.
-
-This includes:
-
-- Missing-value handling
-- Feature preparation
-- Landing-outcome classification
-- Encoding of categorical variables
-
-### 3. Exploratory data analysis
-
-Launch outcomes are investigated using:
-
-- Pandas
-- SQL / SQLite
-- Statistical summaries
-- Data visualization
-
-The analysis explores relationships between landing success and variables such as:
-
-- Launch site
-- Payload mass
-- Orbit
-- Booster characteristics
-- Reuse history
-
-### 4. Geospatial analysis
-
-Launch-site locations and surrounding geographic features are explored using interactive maps.
-
-### 5. Machine learning
-
-The landing outcome is treated as a binary classification problem.
-
-The notebook compares several supervised-learning algorithms:
-
-- Logistic Regression
-- Support Vector Machine
-- Decision Tree
-- K-Nearest Neighbours
-
-Hyperparameters are explored using grid search and the models are evaluated on held-out test data.
-
-### 6. Interactive dashboard
-
-A Dash / Plotly application provides interactive exploration of launch records.
-
-The dashboard includes:
-
-- Launch-site selection
-- Success/failure distribution
-- Payload-range filtering
-- Interactive payload-versus-outcome scatter plots
-- Booster-category comparison
-
-## Repository structure
-
-| File | Purpose |
-|---|---|
-| `1.0-Spacex-data-collection-api.ipynb` | API-based data collection |
-| `2.0- Webscraping.ipynb` | Web scraping |
-| `3.0-Spacex-Data wrangling.ipynb` | Data cleaning and preparation |
-| `4.0 EDA with Data Visulization.ipynb` | Exploratory data analysis |
-| `5.0 EDA with SQLlite.ipynb` | SQL-based analysis |
-| `6.0 SpaceX_Machine Learning Prediction_Part_5.ipynb` | Machine-learning modelling |
-| `lab_jupyter_launch_site_location.ipynb` | Geospatial launch-site analysis |
-| `spacex_dash_app_finished.py` | Interactive Dash application |
-| `capstone-story-JoseMariaPacheco.pdf` | Project presentation |
-
-## Technologies
-
-- Python
-- Pandas
-- NumPy
-- Requests / API integration
-- Web scraping
-- SQL / SQLite
-- Matplotlib
-- Seaborn
-- Plotly
-- Dash
-- scikit-learn
-- Jupyter Notebook
-
-## Running the dashboard
-
-The dashboard source is available in:
+## Run the Dash dashboard locally
 
 ```bash
-spacex_dash_app_finished.py
+pip install -r requirements.txt
+python spacex_dashboard.py
 ```
 
-It expects a local dataset named:
+Then open:
 
 ```text
-spacex_launch_dash.csv
+http://127.0.0.1:8050
 ```
 
-That CSV is not currently included in the repository, so the dashboard is not yet fully reproducible from a fresh clone.
+## Fastest portfolio option
 
-Restoring or regenerating this dataset is the next recommended maintenance step.
+For Nikado, the easiest option is `spacex_dashboard.html`.
 
-## Background
+Because it is static and self-contained, it can be uploaded to your hosting and linked from a button such as:
 
-This project was originally developed as the capstone project of the IBM Data Science Professional Certificate and has been retained as an end-to-end demonstration of the Data Science workflow.
+**Explorar dashboard**
 
-## Project type
+or embedded in an iframe.
 
-**Data Acquisition · EDA · SQL · Machine Learning · Interactive Visualization**
+## Notebook data
+
+The notebook downloads the two public IBM Skills Network datasets used by the original project when it runs. Run the notebook once before committing it to GitHub if you want GitHub to display the final generated plots as saved outputs.
